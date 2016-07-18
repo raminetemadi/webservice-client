@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{header.lang}}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{{ app.config.name }}</title>
+
+	<script src="{{ app.config.baseUrl }}/asset/js/jquery-1.9.1.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="{{ app.config.baseUrl }}/asset/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ app.config.baseUrl }}/asset/css/main.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="{{ app.config.baseUrl }}/asset/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="{{ app.config.baseUrl }}/asset/js/bootstrap.min.js"></script>
+</head>
+    <body >
+		<!-- START INCLUDE PAGE -->
+		{# include contents file #}
+		{% block content %}{% include content_path %}{% endblock %}
+
+		{# include javascript files from jsfiles.html in crmLayouts folder #}
+		{% block js %}{% include jsfiles %}{% endblock %}
+		<!-- END INCLUDE PAGE -->
+    </body>
+
+</html>

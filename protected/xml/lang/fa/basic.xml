@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<labels>
+    <!-- START Errors -->
+    <errors>
+        <E3000>Something is wrong.</E3000>
+        <E400>Please fill out param.</E400>
+        <E401>Please fill out param.</E401>
+        <E402>Sorry! Something is wrong.</E402>
+        <E403>Authenticate failed!</E403>
+    </errors>
+    <!-- END ERRORS -->
+
+    <gbasic>
+    </gbasic>
+</labels>

@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-md-offset-4 box-center text-center" style="margin-top: 20px;">
+                <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">{{ labels.h1 }}</h4>
+                    </div>
+
+                    <div class="panel-body form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="text" id="input" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 pull-left">
+                                <div class="form-group">
+                                    {# populating key arrays using twig #}
+                                    {% set keys={ 1:{value:1,mode:"digit",id:"",text:"1"},
+                                                  2:{value:2,mode:"digit",id:"",text:"2"},
+                                                  3:{value:3,mode:"digit",id:"",text:"3"},
+                                                  m:{value:"*",mode:"op",id:"",text:"x"},
+                                                  4:{value:4,mode:"digit",id:"",text:"4"},
+                                                  5:{value:5,mode:"digit",id:"",text:"5"},
+                                                  6:{value:6,mode:"digit",id:"",text:"6"},
+                                                  s:{value:"-",mode:"op",id:"",text:"-"},
+                                                  c:{value:"c",mode:"",id:"clear",text:"C"},
+                                                  0:{value:"0",mode:"digit",id:"",text:"0"},
+                                                  e:{value:"=",mode:"",id:"submit",text:"="},
+                                                  p:{value:"+",mode:"op",id:"",text:"+"}
+                                                }
+                                    %}
+                                    {% for item in keys %}
+                                    <div class="col-md-3 pull-left mb11">
+                                        <button class="btn btn-primary btn-lg text-center " value="{{item.value}}" mode="{{item.mode}}" id="{{item.id}}">{{item.text}}</button>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12"><div id="msg"></div></div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('button[mode="digit"]').click(function () {
+            var val = $(this).val();
+
+            $('#input').val( $('#input').val() + val);
+        });
+
+        $('button[mode="op"]').click(function () {
+            var val = $(this).val();
+
+            var i =  $('#input').val();
+
+            if(i.search(/\+/) == -1 && i.search(/\-/) == -1 && i.search(/\*/) == -1)
+                $('#input').val( i + val);
+            else
+                $('#submit').click();
+        });
+
+        $('#submit').click(function () {
+
+            $.post('/s/calculate', {input: $('#input').val()}, function (data) {
+                if( !isNaN(data) ) $('#input').val(data); else $('#msg').html(data);
+            })
+        });
+
+        $('#clear').click(function () {
+            $('#input').val('');
+        });
+    })
+</script>
